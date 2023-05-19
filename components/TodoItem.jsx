@@ -5,7 +5,7 @@ import { removeTodo, toggleComplete } from './reducers/todoSlice';
 const TodoItem = ({ todo }) => {
   const dispatch = useDispatch();
 
-  const handleRemoveTodo = () => {
+  const handleRemove = () => {
     dispatch(removeTodo(todo.id));
   };
 
@@ -15,9 +15,9 @@ const TodoItem = ({ todo }) => {
 
   return (
     <div>
-      <span style={{ textDecoration: todo.isCompleted ? 'line-through' : 'none' }}>{todo.content}</span>
+      <span style={{ textDecoration: todo.isCompleted ? 'line-through' : 'none' }}>{todo.text}</span>
       {todo.isCompleted ? (
-        <button onClick={handleRemoveTodo}>Remove</button>
+        <button onClick={handleRemove}>Remove</button>
       ) : (
         <button onClick={handleToggleComplete}>Finish</button>
       )}
