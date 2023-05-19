@@ -1,8 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TodoItem from './TodoItem';
 import { setFilter } from './reducers/todoSlice';
+
 const TodoList = () => {
+  const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.list);
   const filter = useSelector((state) => state.todos.filter);
 
@@ -17,12 +19,16 @@ const TodoList = () => {
     }
   };
 
+  const handleFilterChange = (selectedFilter) => {
+    dispatch(setFilter(selectedFilter));
+  };
+
   return (
     <div>
       <div>
-        <button onClick={() => setFilter('all')}>All</button>
-        <button onClick={() => setFilter('todo')}>Todo</button>
-        <button onClick={() => setFilter('finished')}>Finish</button>
+        <button onClick={() => handleFilterChange('all')}>All</button>
+        <button onClick={() => handleFilterChange('todo')}>Todo</button>
+        <button onClick={() => handleFilterChange('finished')}>Finish</button>
       </div>
       <ul>
         {filteredTodos().map((todo) => (
